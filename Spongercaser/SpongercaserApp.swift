@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct SpongercaserApp: App {
+
+    @StateObject var viewModel = ViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(model: viewModel)
+            #if os(macOS)
+                .frame(minWidth: 500, minHeight: 300)
+            #endif
         }
     }
 }

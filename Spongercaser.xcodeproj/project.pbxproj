@@ -11,6 +11,8 @@
 		5A62F24E28F4988D005E8BA9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A62F24D28F4988D005E8BA9 /* ContentView.swift */; };
 		5A62F25028F4988E005E8BA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A62F24F28F4988E005E8BA9 /* Assets.xcassets */; };
 		5A62F25428F4988E005E8BA9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A62F25328F4988E005E8BA9 /* Preview Assets.xcassets */; };
+		5A62F25B28F4992C005E8BA9 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A62F25A28F4992C005E8BA9 /* ViewModel.swift */; };
+		5A9AD6D328F4AF2D0003824A /* OutputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9AD6D228F4AF2D0003824A /* OutputView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,8 @@
 		5A62F24F28F4988E005E8BA9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5A62F25128F4988E005E8BA9 /* Spongercaser.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Spongercaser.entitlements; sourceTree = "<group>"; };
 		5A62F25328F4988E005E8BA9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		5A62F25A28F4992C005E8BA9 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		5A9AD6D228F4AF2D0003824A /* OutputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,8 @@
 			children = (
 				5A62F24B28F4988D005E8BA9 /* SpongercaserApp.swift */,
 				5A62F24D28F4988D005E8BA9 /* ContentView.swift */,
+				5A9AD6D228F4AF2D0003824A /* OutputView.swift */,
+				5A62F25A28F4992C005E8BA9 /* ViewModel.swift */,
 				5A62F24F28F4988E005E8BA9 /* Assets.xcassets */,
 				5A62F25128F4988E005E8BA9 /* Spongercaser.entitlements */,
 				5A62F25228F4988E005E8BA9 /* Preview Content */,
@@ -140,7 +146,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A62F24E28F4988D005E8BA9 /* ContentView.swift in Sources */,
+				5A62F25B28F4992C005E8BA9 /* ViewModel.swift in Sources */,
 				5A62F24C28F4988D005E8BA9 /* SpongercaserApp.swift in Sources */,
+				5A9AD6D328F4AF2D0003824A /* OutputView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
