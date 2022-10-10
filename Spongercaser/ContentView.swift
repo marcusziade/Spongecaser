@@ -26,7 +26,7 @@ struct ContentView: View {
                         message: model.outputMessage,
                         buttonTitle: model.state == .copied ? "Copied" : "Copy"
                     ) {
-                        model.copyOutput()
+                        model.copyToClipboard()
                     }
                 }
             }

@@ -7,9 +7,6 @@
 
 import Combine
 import Foundation
-#if os(iOS)
-import UIKit
-#endif
 import SwiftUI
 
 final class ViewModel: ObservableObject {
@@ -32,15 +29,7 @@ final class ViewModel: ObservableObject {
     @Published var state: State = .empty
 
     init() {
-#if os(macOS)
-        if let clipboard = NSPasteboard.general.string(forType: .string) {
-            inputMessage = clipboard
-        }
-#elseif os(iOS)
-        if let clipboard = UIPasteboard.general.string {
-            inputMessage = clipboard
-        }
-#endif
+        readClipboard()
 
         $inputMessage
             .dropFirst()
@@ -49,23 +38,26 @@ final class ViewModel: ObservableObject {
             .debounce(for: 0.2, scheduler: DispatchQueue.main)
             .receive(on: DispatchQueue.main)
             .sink { [unowned self] message in
+                outputMessage = ""
                 if message.isEmpty {
                     state = .empty
-                    outputMessage = ""
                 } else {
                     makeSpongecase(for: message)
-                    state = .result
                 }
             }
             .store(in: &cancellables)
     }
 
-    func copyOutput() {
+    func copyToClipboard() {
         state = .copied
-#if os(iOS)
+#if os(macOS)
+        let pasteboard = NSPasteboard.general
+        pasteboard.declareTypes([.string], owner: self)
+        pasteboard.setString(outputMessage, forType: .string)
+#elseif os(iOS)
+        UIPasteboard.general.string = outputMessage
         UINotificationFeedbackGenerator().notificationOccurred(.success)
 #endif
-        copyToClipboard(with: outputMessage)
     }
 
     // MARK: Private
@@ -73,19 +65,21 @@ final class ViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
 
     private func makeSpongecase(for message: String) {
-        outputMessage = ""
+        state = .result
         for c in message {
             outputMessage.append(Bool.random() ? c.uppercased() : c.lowercased())
         }
     }
 
-    private func copyToClipboard(with message: String) {
+    private func readClipboard() {
 #if os(macOS)
-        let pasteboard = NSPasteboard.general
-        pasteboard.declareTypes([.string], owner: self)
-        pasteboard.setString(message, forType: .string)
+        if let clipboard = NSPasteboard.general.string(forType: .string) {
+            inputMessage = clipboard
+        }
 #elseif os(iOS)
-        UIPasteboard.general.string = message
+        if let clipboard = UIPasteboard.general.string {
+            inputMessage = clipboard
+        }
 #endif
     }
 }
