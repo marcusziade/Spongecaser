@@ -32,9 +32,15 @@ final class ViewModel: ObservableObject {
     @Published var state: State = .empty
 
     init() {
-        if let clipboard = pasteboard.string(forType: .string) {
+#if os(macOS)
+        if let clipboard = NSPasteboard.general.string(forType: .string) {
             inputMessage = clipboard
         }
+#elseif os(iOS)
+        if let clipboard = UIPasteboard.general.string {
+            inputMessage = clipboard
+        }
+#endif
 
         $inputMessage
             .dropFirst()
@@ -66,8 +72,6 @@ final class ViewModel: ObservableObject {
 
     private var cancellables = Set<AnyCancellable>()
 
-    private let pasteboard = NSPasteboard.general
-
     private func makeSpongecase(for message: String) {
         outputMessage = ""
         for c in message {
@@ -76,7 +80,12 @@ final class ViewModel: ObservableObject {
     }
 
     private func copyToClipboard(with message: String) {
+#if os(macOS)
+        let pasteboard = NSPasteboard.general
         pasteboard.declareTypes([.string], owner: self)
         pasteboard.setString(message, forType: .string)
+#elseif os(iOS)
+        UIPasteboard.general.string = message
+#endif
     }
 }
