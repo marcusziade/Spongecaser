@@ -33,9 +33,7 @@ final class ViewModel: ObservableObject {
 
         $inputMessage
             .dropFirst()
-            .subscribe(on: DispatchQueue.global())
             .removeDuplicates()
-            .debounce(for: 0.2, scheduler: DispatchQueue.main)
             .receive(on: DispatchQueue.main)
             .sink { [unowned self] message in
                 outputMessage = ""
