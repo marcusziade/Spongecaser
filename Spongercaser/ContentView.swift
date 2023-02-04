@@ -30,6 +30,7 @@ struct ContentView: View {
                     }
                 }
             }
+            .ignoresSafeArea(edges: .bottom)
             #if os(iOS)
             .animation(.easeInOut, value: model.state)
             #endif
